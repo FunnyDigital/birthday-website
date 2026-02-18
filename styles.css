@@ -1,0 +1,372 @@
+/* Soft romantic pastel theme */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fef8f5;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* pretty scroll behavior for anchors */
+html { scroll-behavior: smooth; }
+
+#hero {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+#hero .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 0 1rem;
+}
+
+#hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* subtle animated sparkles using CSS gradients */
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 0%, transparent 20%);
+    background-size: 100px 100px;
+    opacity: 0.15;
+    animation: moveSparkles 10s linear infinite;
+}
+
+@keyframes moveSparkles {
+    from { background-position: 0 0, 50px 50px; }
+    to { background-position: -100px -100px, 150px 150px; }
+}
+
+/* floating heart animations */
+.hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(255, 111, 145, 0.8);
+    font-size: 1.5rem;
+    animation: floatUp 6s linear infinite;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2rem;
+    }
+}
+
+#hero .name {
+    font-family: 'Great Vibes', cursive;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+    #hero .name {
+        font-size: 1em;
+    }
+}
+
+#countdown {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    #countdown {
+        font-size: 1rem;
+    }
+}
+
+#startBtn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    background: #fff;
+    color: #ff6f91;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#startBtn:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+    #startBtn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Roadmap entrance animation */
+@keyframes slideUpReveal {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* roadmap cards */
+#roadmap {
+    position: relative;
+    /* extra space before the first memory so it doesn't sit flush with the top of the line */
+    padding: 8rem 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+#roadmap.activated {
+    animation: slideUpReveal 0.8s ease-out forwards;
+}
+
+@media (max-width: 768px) {
+    #roadmap {
+        padding: 6rem 2rem 4rem;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #roadmap {
+        padding: 5rem 1.5rem 2rem;
+        gap: 2rem;
+    }
+}
+
+.start-date {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #ff6f91;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 1;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+    .start-date {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        top: 1rem;
+    }
+}
+
+/* central vertical line for roadmap */
+#roadmap::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: #ff6f91;
+    transform: translateX(-50%);
+    top: 90px;
+    z-index: 0;
+}
+
+.roadmap-item {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    transition: transform 0.6s, opacity 0.6s;
+    opacity: 0;
+}
+
+.roadmap-item .memory-card {
+    margin-left: 40px;
+}
+.roadmap-item:nth-child(even) .memory-card {
+    margin-left: 0;
+    margin-right: 80px;
+}
+
+@media (max-width: 768px) {
+    .roadmap-item .memory-card {
+        margin-left: 30px;
+    }
+    .roadmap-item:nth-child(even) .memory-card {
+        margin-left: 0;
+        margin-right: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .roadmap-item .memory-card {
+        margin-left: 20px;
+    }
+    .roadmap-item:nth-child(even) .memory-card {
+        margin-left: 0;
+        margin-right: 40px;
+    }
+}
+.roadmap-item:nth-child(even) {
+    justify-content: flex-end;
+}
+.roadmap-item.in-view {
+    opacity: 1;
+}
+.roadmap-item.in-view .memory-card {
+    transform: translateX(0) scale(1);
+}
+
+.memory-card {
+    width: 300px;
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.6s;
+    transform: translateX(-100px) scale(0.8);
+    transform-style: preserve-3d;
+}
+
+.roadmap-item:nth-child(even) .memory-card {
+    transform: translateX(100px) scale(0.8);
+}
+
+@media (max-width: 768px) {
+    .memory-card {
+        width: 260px;
+        height: 180px;
+        transform: translateX(-80px) scale(0.8);
+    }
+    .roadmap-item:nth-child(even) .memory-card {
+        transform: translateX(80px) scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-card {
+        width: 200px;
+        height: 140px;
+        transform: translateX(-60px) scale(0.8);
+    }
+    .roadmap-item:nth-child(even) .memory-card {
+        transform: translateX(60px) scale(0.8);
+    }
+}
+
+.memory-card .front,
+.memory-card .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.6s ease-in-out;
+}
+
+.memory-card .front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.memory-card .front {
+    transform: rotateY(0deg);
+}
+
+.date-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 111, 145, 0.9);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.memory-card .back {
+    background-color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.memory-card .back p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: center;
+    color: #333;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .memory-card .back p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-card .back p {
+        font-size: 0.7rem;
+    }
+}
+
+.memory-card.flipped .front {
+    transform: rotateY(180deg);
+}
+
+.memory-card.flipped .back {
+    transform: rotateY(0deg);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+}
