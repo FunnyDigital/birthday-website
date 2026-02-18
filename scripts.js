@@ -6,11 +6,18 @@ const targetDate = new Date('2026-02-19T00:00:00');
 // targetDate.setFullYear(new Date().getFullYear());
 // if (targetDate < new Date()) targetDate.setFullYear(targetDate.getFullYear()+1);
 
+let countdownComplete = false;
+
 function updateCountdown() {
     const now = new Date();
     const diff = targetDate - now;
     if (diff <= 0) {
         countdownEl.textContent = '🎉 Today!';
+        countdownComplete = true;
+        const startBtn = document.getElementById('startBtn');
+        startBtn.disabled = false;
+        startBtn.style.cursor = 'pointer';
+        startBtn.style.opacity = '1';
         return;
     }
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -22,10 +29,19 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// start button scroll
+// Disable start button until countdown is complete
 const startBtn = document.getElementById('startBtn');
+startBtn.disabled = true;
+startBtn.style.cursor = 'not-allowed';
+startBtn.style.opacity = '0.6';
+
+// start button scroll
 startBtn.addEventListener('click', () => {
+    if (!countdownComplete) {
+        return; // Don't do anything if countdown is not complete
+    }
     const roadmap = document.getElementById('roadmap');
+    roadmap.classList.add('show');
     roadmap.classList.add('activated');
     roadmap.scrollIntoView({ behavior: 'smooth' });
 });

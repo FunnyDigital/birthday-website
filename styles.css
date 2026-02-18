@@ -149,10 +149,14 @@ html { scroll-behavior: smooth; }
     position: relative;
     /* extra space before the first memory so it doesn't sit flush with the top of the line */
     padding: 8rem 3rem 4rem;
-    display: flex;
+    display: none;  /* Hidden until countdown is complete and button is clicked */
     flex-direction: column;
     align-items: center;
     gap: 4rem;
+}
+
+#roadmap.show {
+    display: flex;
 }
 
 #roadmap.activated {
